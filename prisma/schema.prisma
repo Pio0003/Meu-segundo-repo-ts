@@ -1,0 +1,72 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url = env("DATABASE_URL")
+}
+model BiblioLeitor {
+    id         Int @id @default(autoincrement())
+    nome       String
+    email      String @unique
+    senha      String 
+    matricula  String @unique
+    possuiPendencia Boolean
+
+    criadoEm DateTime @default(now())
+
+
+    @@map ("BiblioLeitor")
+}
+
+model CategoriaObra {
+  id            Int   @id @default(autoincrement())
+  nomeCategoria String
+
+  obras Obra[]
+
+  @@map("Categoria_Obras")
+}
+
+model Obra {
+  id          Int @id @default(autoincrement())
+  categoriaId Int
+
+  categoria CategoriaObra @relation(fields: [categoriaId], references: [id])
+
+  autor   String
+  titulo  String
+  editora String
+  statusDisponibilidade String @default("Disponivel")
+
+  obras Obra []
+
+  @@map("Obras")
+}
+
+model BiblioFuncionario {
+  id       Int    @id @default(autoincrement())
+  nome     String
+  email    String @unique
+  senha    String
+  cargo    String
+
+  criadoEm DateTime @default(now())
+
+  @@map("Funcionario")
+}
+
+model ObraExemplar {
+
+    id Int @id @default(autoincrement())
+    id_obra Int
+    codigo_exemplar String @unique
+    estado_de_conservacao String
+
+  obras Obra @relation(fields: [id_obra], references: [id])
+
+  sttusExemplar String @default("Disponivel")
+
+  @@map("ObraExemplar")
+}
