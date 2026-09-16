@@ -1,27 +1,29 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
-    url = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
+
 model BiblioLeitor {
-    id         Int @id @default(autoincrement())
-    nome       String
-    email      String @unique
-    senha      String 
-    matricula  String @unique
-    possuiPendencia Boolean
+  id              Int     @id @default(autoincrement())
+  nome            String
+  email           String  @unique
+  senha           String
+  matricula       String  @unique
+  possuiPendencia Boolean
 
-    criadoEm DateTime @default(now())
+  criadoEm DateTime @default(now())
 
+  emprestimos Emprestimo[]
 
-    @@map ("BiblioLeitor")
+  @@map("BiblioLeitor")
 }
 
 model CategoriaObra {
-  id            Int   @id @default(autoincrement())
+  id            Int    @id @default(autoincrement())
   nomeCategoria String
 
   obras Obra[]
@@ -35,38 +37,78 @@ model Obra {
 
   categoria CategoriaObra @relation(fields: [categoriaId], references: [id])
 
-  autor   String
-  titulo  String
-  editora String
-  statusDisponibilidade String @default("Disponivel")
-
-  obras Obra []
+  autor                 String
+  titulo                String
+  editora               String
+  statusDisponibilidade String        @default("Disponivel")
+  ObraExemplar          ObraExemplar?
+  emprestimos           Emprestimo[]
+  manutencoes           Manutencao[]
 
   @@map("Obras")
 }
 
 model BiblioFuncionario {
-  id       Int    @id @default(autoincrement())
-  nome     String
-  email    String @unique
-  senha    String
-  cargo    String
+  id    Int    @id @default(autoincrement())
+  nome  String
+  email String @unique
+  senha String
+  cargo String
 
   criadoEm DateTime @default(now())
+
+  emprestimos Emprestimo[]
 
   @@map("Funcionario")
 }
 
 model ObraExemplar {
-
-    id Int @id @default(autoincrement())
-    id_obra Int
-    codigo_exemplar String @unique
-    estado_de_conservacao String
+  id                    Int    @id @default(autoincrement())
+  id_obra               Int    @unique
+  codigo_exemplar       String @unique
+  estado_de_conservacao String
 
   obras Obra @relation(fields: [id_obra], references: [id])
 
-  sttusExemplar String @default("Disponivel")
+  statusExemplar String @default("Disponivel")
+
+  emprestimo Emprestimo[]
 
   @@map("ObraExemplar")
+}
+
+model Emprestimo {
+  id            Int @id @default(autoincrement())
+  leitorId      Int
+  funcionarioId Int
+  obraid        Int
+  exemplarid    Int
+
+  leitor      BiblioLeitor      @relation(fields: [leitorId], references: [id])
+  funcionario BiblioFuncionario @relation(fields: [funcionarioId], references: [id])
+  obra        Obra              @relation(fields: [obraid], references: [id])
+  exemplar    ObraExemplar      @relation(fields: [exemplarid], references: [id])
+
+  dataRetirada          DateTime  @default(now())
+  dataPrevistaDevolucao DateTime
+  dataDevolucaoReal     DateTime?
+
+  valorTotal Float
+
+  statusEmprestimo String @default("Aceito")
+
+  @@map("Emprestimo")
+}
+
+model Manutencao {
+  id     Int @id @default(autoincrement())
+  obraid Int
+
+  obra Obra @relation(fields: [obraid], references: [id])
+
+  descricaoServico String
+  dataManutencao   DateTime @default(now())
+  valorCusto       Float
+
+  @@map("Manutencoes")
 }

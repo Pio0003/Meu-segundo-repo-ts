@@ -2,11 +2,7 @@ import bcrypt from 'bcryptjs';
 import { prisma } from '../config/prisma';
 import { AppError } from '../middlewares/error.middleeare';
 
-// Lista de campos "públicos" de um Cliente — usada em toda consulta, para o
-// campo "senha" nunca sequer sair da base de dados. Preferimos isto a buscar
-// o registo inteiro e "desestruturar para remover a senha", porque essa
-// segunda abordagem criaria uma variável nunca usada (e o tsconfig deste
-// projeto tem "noUnusedLocals": true, o que quebraria a compilação).
+
 
 const SELECT_CLIENTE_PUBLICO = {
     id: true,
@@ -27,16 +23,15 @@ interface CriarClienteInput {
 }
 
 export async function criarCliente(dados: CriarClienteInput) {
-  // bcrypt.hash(senha, 10) gera um hash irreversível. O "10" é o número de
-  // "salt rounds": quanto maior, mais lento e mais seguro contra força bruta.
-  const senhaHash = await bcrypt.hash(dados.senha, 10);
 
-  const clienteCriado = await prisma.biblioLeitor.create({
-    data: {...dados, senha: senhaHash },
-    select: SELECT_CLIENTE_PUBLICO,
-  });
+    const senhaHash = await bcrypt.hash(dados.senha, 10);
 
-  return clienteCriado;
+    const clienteCriado = await prisma.biblioLeitor.create({
+        data: { ...dados, senha: senhaHash },
+        select: SELECT_CLIENTE_PUBLICO,
+    });
+
+    return clienteCriado;
 }
 
 export async function listarClientes() {

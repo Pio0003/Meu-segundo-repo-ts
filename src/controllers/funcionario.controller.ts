@@ -7,7 +7,7 @@ export async function criar(req: Request, res: Response): Promise<void> {
 
   const funcionario = await funcionarioService.criarFuncionario({ nome, cargo, email, senha });
 
- 
+
   res.status(201).json(funcionario);
 }
 

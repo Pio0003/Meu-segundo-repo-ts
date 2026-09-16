@@ -10,9 +10,10 @@ interface LoginInput {
 
 export async function login(dados: LoginInput) {
   const funcionario = await prisma.biblioFuncionario.findUnique({ where: { email: dados.email } });
+  
 
   const senhaConfere = await bcrypt.compare(dados.senha, funcionario?.senha ?? '');
-
+  
   if (!funcionario || !senhaConfere) {
     throw new AppError('E-mail ou senha inválidos.', 401);
   }
