@@ -38,7 +38,7 @@ export const swaggerSpec = swaggerJSDoc({
                     scheme: 'bearer',
                     bearerFormat: 'JWT',
                     description:
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJjbGllbnRlQHRlc3RlLmNvbSIsImlhdCI6MTc4OTU1ODY3NSwiZXhwIjoxNzg5NjQ1MDc1fQ.KOQTcjUwDRQkb_R2XtxHYEwWy3iomnD_KizVmnJ8ofE',
+                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJmdW5jaW9uYXJpb0B0ZXN0ZS5jb20iLCJpYXQiOjE3ODk1NjgyMDUsImV4cCI6MTc4OTY1NDYwNX0.7KJ0o1_HhCnTUg7vrodwwXED7S6iFvLh-wZemZttxl4',
                 },
             },
 
