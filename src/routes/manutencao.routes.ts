@@ -33,6 +33,32 @@ router.post('/', manutencaoController.registrar);
  *                 $ref: '#/components/schemas/Manutencao'
  */
 router.get('/', manutencaoController.listar);
+/**
+ * @openapi
+ * /api/manutencoes/{id}/concluir:
+ *   patch:
+ *     tags: [Manutenções]
+ *     summary: Conclui a manutenção e disponibiliza o exemplar
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema: { type: integer }
+ *         example: 1
+ *     responses:
+ *       200:
+ *         description: Manutenção concluída; o exemplar volta a 'Disponivel'
+ *       400:
+ *         description: Manutenção já finalizada ou cancelada
+ *       401:
+ *         description: Token ausente, inválido ou expirado
+ *       403:
+ *         description: A manutenção pertence a OUTRO cliente
+ *       404:
+ *         description: Manutenção não encontrada
+ */
 router.patch('/:id/concluir', manutencaoController.concluir);
 
 export default router;
