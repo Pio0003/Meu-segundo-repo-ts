@@ -38,7 +38,7 @@ const router = Router();
  *                   type: string
  *                   example: eyJhbGciOiJIUzI1NiIs...
  *                 leitor:
- *                   $ref: '#/components/schemas/leitor'
+ *                   $ref: '#/components/schemas/BiblioLeitor'
  *       401:
  *         description: E-mail ou senha inválidos
  *         content:

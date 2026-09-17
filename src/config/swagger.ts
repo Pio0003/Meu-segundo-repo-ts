@@ -19,7 +19,6 @@ export const swaggerSpec = swaggerJSDoc({
             { url: 'http://localhost:3333', description: 'Ambiente de desenvolvimento' },
         ],
 
-
         tags: [
             { name: 'Autenticação', description: 'Login e emissão de token JWT' },
             { name: 'Clientes', description: 'Cadastro e consulta de leitores' },
@@ -50,7 +49,6 @@ export const swaggerSpec = swaggerJSDoc({
                         erro: { type: 'string', example: 'Mensagem explicando o que deu errado.' },
                     },
                 },
-
                 BiblioLeitor: {
                     type: 'object',
                     description: 'Cliente SEM o campo senha (a senha nunca sai do banco).',
@@ -74,7 +72,6 @@ export const swaggerSpec = swaggerJSDoc({
                         criadoEm: { type: 'string', format: 'date-time' },
                     },
                 },
-
                 CategoriaObra: {
                     type: 'object',
                     properties: {
@@ -82,7 +79,6 @@ export const swaggerSpec = swaggerJSDoc({
                         nomeCategoria: { type: 'string', example: 'Infantil' },
                     },
                 },
-
                 Obra: {
                     type: 'object',
                     properties: {
@@ -111,7 +107,8 @@ export const swaggerSpec = swaggerJSDoc({
                             example: 'Bom',
                         },
                         obra: { $ref: '#/components/schemas/Obra' },
-
+                    },
+                },        
                         Emprestimo: {
                             type: 'object',
                             properties: {
@@ -132,7 +129,6 @@ export const swaggerSpec = swaggerJSDoc({
                                 Obra: { $ref: '#/components/schemas/Obra' },
                             },
                         },
-
                         Manutencao: {
                             type: 'object',
                             properties: {
@@ -141,13 +137,11 @@ export const swaggerSpec = swaggerJSDoc({
                                 descricaoServico: { type: 'string', example: 'Restauração de Páginas' },
                                 dataManutencao: { type: 'string', format: 'date-time' },
                                 valorCusto: { type: 'number', example: 150 },
-                                obra: { $ref: '#/components/schemas/Obras' },
+                                obra: { $ref: '#/components/schemas/Obra' },
                             },
                         },
                     },
                 },
             },
-        },
-    },
         apis: ['./src/routes/*.ts', './dist/routes/*.js'],
     });

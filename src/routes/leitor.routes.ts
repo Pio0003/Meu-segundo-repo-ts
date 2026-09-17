@@ -23,7 +23,7 @@ const router = Router();
  *               email: { type: string, format: email, example: "marina@teste.com" }
  *               senha: { type: string, example: "123456" }
  *               matricula: { type: string, example: "98765432100" }
- *               possuiPendencia: { type: boolean, example: "True"}
+ *               possuiPendencia: { type: boolean, example: true }
  *     responses:
  *       201:
  *         description: Cliente criado (sem o campo senha)
@@ -60,7 +60,7 @@ router.get('/', authMiddleware, clienteController.listar); // PROTEGIDA
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/leitor'
+ *               $ref: '#/components/schemas/BiblioLeitor'
  *       401:
  *         description: Token ausente, inválido ou expirado
  *         content:

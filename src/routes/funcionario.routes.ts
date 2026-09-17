@@ -6,7 +6,7 @@ const router = Router();
 
 /**
  * @openapi
- * /api/Funcionario:
+ * /api/funcionario:
  *   post:
  *     tags: [Funcionario]
  *     summary: Cadastra um novo funcionario (rota pública)
@@ -28,7 +28,7 @@ const router = Router();
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Funcionario'
+ *               $ref: '#/components/schemas/BiblioFuncionario'
  *       409:
  *         description: E-mail já cadastrado
  *         content:
@@ -58,7 +58,7 @@ router.get('/', authMiddleware, funcionarioController.listar);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Funcionario'
+ *               $ref: '#/components/schemas/BiblioFuncionario'
  *       401:
  *         description: Token ausente, inválido ou expirado
  *         content:

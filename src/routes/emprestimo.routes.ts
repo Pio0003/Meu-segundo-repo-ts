@@ -10,7 +10,7 @@ router.use(authMiddleware);
  * /api/emprestimo:
  *   post:
  *     tags: [Emprestimo]
- *     summary: Abre um emprestimo para o leitor autenticado (RN01)
+ *     summary: Abre um empréstimo para o cliente autenticado (RN01)
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -19,20 +19,20 @@ router.use(authMiddleware);
  *         application/json:
  *           schema:
  *             type: object
- *             required: [obraid, dataPrevistaDevolucao]
+ *             required: [obraId, dataPrevistaDevolucao]
  *             properties:
- *               obraid: { type: integer, example: 1 }
+ *               obraId: { type: integer, example: 1 }
  *               dataPrevistaDevolucao:
  *                 type: string
  *                 format: date-time
  *                 example: "2026-09-10T12:00:00.000Z"
  *     responses:
  *       201:
- *         description: Emprestimo criado; a obra passa a 'Emprestada'
+ *         description: Empréstimo criado; a obra passa a 'Emprestada'
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/emprestimo'
+ *               $ref: '#/components/schemas/Emprestimo'
  *       400:
  *         description: Obra indisponível (RN01) ou data inválida
  *         content:
@@ -46,7 +46,7 @@ router.use(authMiddleware);
  *             schema:
  *               $ref: '#/components/schemas/RespostaErro'
  *       404:
- *         description: Obra não encontrado
+ *         description: Obra não encontrada
  *         content:
  *           application/json:
  *             schema:

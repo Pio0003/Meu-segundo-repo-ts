@@ -38,7 +38,7 @@ const router = Router();
  *                   type: string
  *                   example: eyJhbGciOiJIUzI1NiIs...
  *                 funcionario:
- *                   $ref: '#/components/schemas/funcionario'
+ *                   $ref: '#/components/schemas/BiblioFuncionario'
  *       401:
  *         description: E-mail ou senha inválidos
  *         content:
