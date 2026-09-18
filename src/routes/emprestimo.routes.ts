@@ -57,7 +57,7 @@ router.post('/', emprestimoController.abrir);
  * @openapi
  * /api/emprestimos:
  *   get:
- *     tags: [Emprestimos]
+ *     tags: [Emprestimo]
  *     summary: Lista o catálogo de empréstimos (rota pública)
  *     parameters:
  *       - name: disponibilidade
@@ -81,9 +81,9 @@ router.post('/', emprestimoController.abrir);
 router.get('/', emprestimoController.listar);
 /**
  * @openapi
- * /api/emprestimos/{id}:
+ * /api/emprestimo/{id}:
  *   get:
- *     tags: [Emprestimos]
+ *     tags: [Emprestimo]
  *     summary: Busca um empréstimo pelo id
  *     security:
  *       - bearerAuth: []
@@ -141,6 +141,32 @@ router.get('/:id', emprestimoController.buscarPorId);
  *         description: Emprestimo não encontrado
  */
 router.patch('/:id/devolver', emprestimoController.devolver);
+/**
+ * @openapi
+ * /api/emprestimo/{id}/cancelar:
+ *   patch:
+ *     tags: [Emprestimo]
+ *     summary: Cancela o empréstimo e disponibiliza a obra
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema: { type: integer }
+ *         example: 1
+ *     responses:
+ *       200:
+ *         description: Cancelado; a obra volta a 'Disponivel'
+ *       400:
+ *         description: Emprestimo já finalizado ou cancelado
+ *       401:
+ *         description: Token ausente, inválido ou expirado
+ *       403:
+ *         description: O emprestimo pertence a OUTRO cliente
+ *       404:
+ *         description: Emprestimo não encontrado
+ */
 router.patch('/:id/cancelar', emprestimoController.cancelar);
 
 export default router;
