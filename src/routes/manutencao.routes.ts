@@ -6,6 +6,56 @@ const router = Router();
 
 router.use(authMiddleware); // RN04: todas as rotas exigem autenticação
 
+/**
+ * @openapi
+ * /api/locacoes:
+ *   post:
+ *     tags: [Locações]
+ *     summary: Abre uma locação para o cliente autenticado (RN01)
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [obraId, descricao, dataManutencao, valorCusto]
+ *             properties:
+ *               obraId: { type: integer, example: 1 }
+ *               descricao: { type: string, example: "Restauração de página" }
+ *               dataManutencao: {
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2026-09-10T12:00:00.000Z"
+ *               }
+ *               valorCusto: { type: number, format: float, example: 100.00 }
+ *     responses:
+ *       201:
+ *         description: Manutenção criada; a obra passa a 'Em Manutenção'
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Manutencao'
+ *       400:
+ *         description: a obra está indisponível (RN01) ou data inválida
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/RespostaErro'
+ *       401:
+ *         description: Token ausente, inválido ou expirado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/RespostaErro'
+ *       404:
+ *         description: Obra não encontrada
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/RespostaErro'
+ */
 router.post('/', manutencaoController.registrar);
 /**
  * @openapi

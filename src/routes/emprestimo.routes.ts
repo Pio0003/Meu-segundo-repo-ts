@@ -53,7 +53,66 @@ router.use(authMiddleware);
  *               $ref: '#/components/schemas/RespostaErro'
  */
 router.post('/', emprestimoController.abrir);
+/**
+ * @openapi
+ * /api/emprestimos:
+ *   get:
+ *     tags: [Emprestimos]
+ *     summary: Lista o catálogo de empréstimos (rota pública)
+ *     parameters:
+ *       - name: disponibilidade
+ *         in: query
+ *         required: false
+ *         description: Filtra pelo status do empréstimo
+ *         schema:
+ *           type: string
+ *           enum: [Disponivel, Locado, Manutencao]
+ *         example: Disponivel
+ *     responses:
+ *       200:
+ *         description: Lista de empréstimos (com a categoria incluída)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Emprestimo'
+ */
 router.get('/', emprestimoController.listar);
+/**
+ * @openapi
+ * /api/emprestimos/{id}:
+ *   get:
+ *     tags: [Emprestimos]
+ *     summary: Busca um empréstimo pelo id
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema: { type: integer }
+ *         example: 1
+ *     responses:
+ *       200:
+ *         description: Emprestimo encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/emprestimo'
+ *       401:
+ *         description: Token ausente, inválido ou expirado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/RespostaErro'
+ *       404:
+ *         description: Emprestimo não encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/RespostaErro'
+ */
 router.get('/:id', emprestimoController.buscarPorId);
 /**
  * @openapi
