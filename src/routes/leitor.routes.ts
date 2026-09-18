@@ -30,7 +30,7 @@ const router = Router();
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Biblioleitor'
+ *               $ref: '#/components/schemas/BiblioLeitor'
  *       409:
  *         description: Matricula ou e-mail já cadastrados
  *         content:
@@ -45,7 +45,7 @@ router.get('/', authMiddleware, clienteController.listar); // PROTEGIDA
  * /api/leitor/{id}:
  *   get:
  *     tags: [Clientes]
- *     summary: Busca um cliente pelo id
+ *     summary: Busca um leitor pelo id
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -60,7 +60,7 @@ router.get('/', authMiddleware, clienteController.listar); // PROTEGIDA
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/BiblioLeitor'
+ *               $ref: '#/components/schemas/biblioLeitor'
  *       401:
  *         description: Token ausente, inválido ou expirado
  *         content:
@@ -68,7 +68,7 @@ router.get('/', authMiddleware, clienteController.listar); // PROTEGIDA
  *             schema:
  *               $ref: '#/components/schemas/RespostaErro'
  *       404:
- *         description: Cliente não encontrado
+ *         description: leitor não encontrado
  *         content:
  *           application/json:
  *             schema:

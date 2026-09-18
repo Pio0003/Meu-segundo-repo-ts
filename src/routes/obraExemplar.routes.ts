@@ -17,7 +17,7 @@ const router = Router();
  *         description: Filtra pelo status do exemplar
  *         schema:
  *           type: string
- *           enum: [Disponivel, Locado, Manutencao]
+ *           enum: [Disponivel, Emprestado, Manutencao]
  *         example: Disponivel
  *     responses:
  *       200:

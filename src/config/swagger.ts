@@ -24,7 +24,7 @@ export const swaggerSpec = swaggerJSDoc({
             { name: 'Clientes', description: 'Cadastro e consulta de leitores' },
             { name: 'Funcionario', description: 'Cadastro e consulta de funcionarios' },
             { name: 'Obras', description: 'Catálogo de obras da frota' },
-            { name: 'ObrasExemplares', description: 'Catálogo de exemplares de obras da frota' },
+            { name: 'ObraExemplar', description: 'Catálogo de exemplares de obras da frota' },
             { name: 'Emprestimo', description: 'Abertura, devolução e cancelamento (RN01/RN02)' },
             { name: 'Manutenções', description: 'Registro e conclusão de manutenções (RN03)' },
         ],
