@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import * as manutencaoController from '../controllers/manutencao.controller';
-import { authMiddleware } from '../middlewares/auth.middleware';
+import { authMiddleware } from '../middlewares/auth.funcionario.middleware';
 
 const router = Router();
 
@@ -8,10 +8,10 @@ router.use(authMiddleware); // RN04: todas as rotas exigem autenticação
 
 /**
  * @openapi
- * /api/locacoes:
+ * /api/manutencoes:
  *   post:
- *     tags: [Locações]
- *     summary: Abre uma locação para o cliente autenticado (RN01)
+ *     tags: [Manutenções]
+ *     summary: Registra uma nova manutenção (RN03)
  *     security:
  *       - bearerAuth: []
  *     requestBody:
