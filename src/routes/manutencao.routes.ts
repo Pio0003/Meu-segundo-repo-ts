@@ -23,7 +23,7 @@ router.use(authMiddleware); // RN04: todas as rotas exigem autenticação
  *             required: [obraId, descricao, dataManutencao, valorCusto]
  *             properties:
  *               obraId: { type: integer, example: 1 }
- *               descricao: { type: string, example: "Restauração de página" }
+ *               descricao: { type: string, example: "Restauração de páginas" }
  *               dataManutencao: {
  *                 type: string
  *                 format: date-time
