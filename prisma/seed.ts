@@ -4,6 +4,14 @@ import { prisma } from '../src/config/prisma';
 async function main() {
   console.log('Iniciando o seed da base de dados do Biblio_Tech...');
 
+  // Verifica se o banco já foi populado
+  const categoriasExistentes = await prisma.categoriaObra.count();
+
+  if (categoriasExistentes > 0) {
+    console.log('Banco já populado anteriormente. Nada a fazer.');
+    return;
+  }
+  
   const romance = await prisma.categoriaObra.create({
     data: { nomeCategoria: 'Romance' },
   });
