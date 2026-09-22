@@ -15,7 +15,7 @@ datasource db {
   // endereço DIRETO do Neon (sem "-pooler"). Migrations não funcionam
   // através de um connection pooler.
   directUrl = env("DIRECT_URL")
-}= env("DATABASE_URL")
+}
 
 
 model BiblioLeitor {
