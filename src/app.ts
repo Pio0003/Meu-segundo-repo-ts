@@ -27,3 +27,4 @@ app.get('/', (_req, res) => {
 app.use(erroHandler);
 
 export { app };
+export default app;
