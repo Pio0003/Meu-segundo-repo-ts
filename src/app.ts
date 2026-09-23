@@ -20,7 +20,7 @@ app.get('/api-docs.json', (_req, res) => {
 
 app.use('/api', routes);
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
      res.json({ mensagem: 'O Biblio-Leitor está online.' });
 });
 
